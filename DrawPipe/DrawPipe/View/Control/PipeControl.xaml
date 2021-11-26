@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="DrawPipe.View.Control.PipeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Control="clr-namespace:DrawPipe.View.Control"
+             xmlns:converters="clr-namespace:DrawPipe.Classes"
+             mc:Ignorable="d" 
+             d:DesignHeight="200"
+             Unloaded="PipeControl_OnUnloaded"
+             SizeChanged="UserControl_SizeChanged">
+    
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" x:Key="HourTextStyle">
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0 0 0 -8"/>
+        </Style>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converters:BoolToVisibilityInvertConverter x:Key="BoolToVisibilityInvertConverter" />
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="40" />
+            </Grid.ColumnDefinitions>
+
+            <Button Content="1/3 Base" Click="Button_Click"  VerticalAlignment="Top" Visibility="Collapsed"/>
+
+
+            <!--<Button x:Name="leftButtom" Content="[" VerticalAlignment="Center" Width="30" Height="30" Click="leftButtom_Click" />-->
+
+            <Button x:Name="leftButtom" Width="25" Height="25" Foreground="#FFD4D4D4" BorderBrush="#FFD4D4D4" Background="WhiteSmoke"
+                                        Click="leftButtom_Click"  >
+                <Button.Content>
+                    <Image Width="20" Height="20"  IsEnabled="False" Source="/DrawPipe;component/ImagePipe/left_tube.png"/>
+                </Button.Content>
+            </Button>
+
+            <!--<Button x:Name="rightButtom" Grid.Column="4" Content="]" VerticalAlignment="Center" Width="30" Height="30" Click="rightButtom_Click"/>-->
+
+            <Button x:Name="rightButtom" Width="25" Height="25"  Grid.Column="4" Foreground="#FFD4D4D4" BorderBrush="#FFD4D4D4" Background="WhiteSmoke"
+                                        Click="rightButtom_Click" >
+                <Button.Content>
+                    <Image Width="20" Height="20"  IsEnabled="False" Source="/DrawPipe;component/ImagePipe/right_tube.png"/>
+                </Button.Content>
+            </Button>
+
+            <Grid Grid.Column="1" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" 
+                   Text="0" Style="{StaticResource HourTextStyle}" />
+                <TextBlock Grid.Row="1"
+                   Text="3" Style="{StaticResource HourTextStyle}" />
+                <TextBlock Grid.Row="2"
+                   Text="6" Style="{StaticResource HourTextStyle}" />
+                <TextBlock Grid.Row="3"
+                   Text="9" Style="{StaticResource HourTextStyle}" />
+                <TextBlock Grid.Row="4"
+                   Text="12" Style="{StaticResource HourTextStyle}" />
+
+                
+                <Canvas x:Name="dashCanvas" Grid.Row="0" Grid.Column="1" Grid.RowSpan="5"/>
+
+                <Grid x:Name="holder" Grid.Row="0" Grid.Column="1" Grid.RowSpan="5">
+                    <Control:PipeSegmentControl x:Name="singleSegment" Visibility="{Binding IsSingleSegment, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    <Grid Visibility="{Binding IsSingleSegment,  Mode=OneWay, Converter={StaticResource BoolToVisibilityInvertConverter}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Control:PipeSegmentControl x:Name="leftSegment"/>
+                        <Control:PipeSegmentControl x:Name="centreSegment" Grid.Column="1"/>
+                        <Control:PipeSegmentControl x:Name="righSegment" Grid.Column="2"/>
+                    </Grid>
+                </Grid>
+
+                <!--<Slider x:Name="slider"  Grid.Column="1" Grid.Row="6" Margin="0,12,0,4" Value="{Binding CentralIndex, Mode=TwoWay}"/>-->
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
+<!--<Canvas  Name="drawCanvasLine" Grid.Row="2" Grid.Column="1" Margin="40 0 0 0">
+            </Canvas>-->

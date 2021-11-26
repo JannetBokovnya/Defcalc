@@ -1,0 +1,366 @@
+﻿<Window
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:Controls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dataModel="clr-namespace:DEFCALC.DataModel"
+
+        MinWidth="800" MinHeight="600"  WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d" x:Class="DEFCALC.PassportOfDefect" 
+        Title="Модуль по расчетам дефектов в шурфе" 
+        Icon="Images/app_icon.ico"
+        Loaded="Window_Loaded" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="180"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="54"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text=" Паспорт дефекта " VerticalAlignment="Center"
+			Foreground="#FF555454" FontSize="18" FontWeight="Bold"  />
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Margin="5" Grid.Column="0" BorderBrush="#FF999A9C">
+                <GroupBox.Header>
+                    <Label  Content="Идентификация" Foreground="#FF555454" Background="Transparent" FontWeight="Bold" />
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Название" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center"   />
+                        <TextBox x:Name="txtName" Grid.Column="1" Text="{Binding DefectName}" VerticalAlignment="Center" Margin="3"/>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Тип"  HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" />
+                        <Controls:RadComboBox x:Name="ddlType" Grid.Column="1"
+							ItemsSource="{Binding DictListTypeDefect}"
+							SelectedValue="{Binding SelectedTypeDefect}"
+							DisplayMemberPath="Name" 
+							Margin="3"   VerticalAlignment="Center"  HorizontalAlignment="Stretch"/>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Расчетный тип" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" />
+                        <Controls:RadComboBox x:Name="ddlCountType" Grid.Column="1" 
+							ItemsSource="{Binding DictListCalcType}"
+							SelectedValue="{Binding SelectedCalcType}"
+							DisplayMemberPath="Name"
+							Margin="3"   VerticalAlignment="Center"  HorizontalAlignment="Stretch"/>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Column="1" Margin="5" BorderBrush="#FF999A9C">
+                <GroupBox.Header>
+                    <Label  Content="Информация об отремонтированном дефекте" Foreground="#FF555454" Background="Transparent" FontWeight="Bold"/>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Дефект устранен" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center"   />
+                        <Controls:RadComboBox x:Name="ddlDefectUstr"  Margin="3"  Grid.Column="1"
+							ItemsSource="{Binding DictListDefectUstr}"
+							SelectedValue="{Binding SelectedDefectUstr}"
+							DisplayMemberPath="Name" SelectionChanged="ddlDefectUstr_SelectionChanged" 
+							 VerticalAlignment="Center"  HorizontalAlignment="Stretch"/>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Дата устранения дефекта"  HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" />
+                        <Controls:RadDatePicker x:Name="cldataDefectUstr" Margin="3" Grid.Column="1"  DateTimeWatermarkContent="Выбрать дату"
+							 VerticalAlignment="Center"  HorizontalAlignment="Stretch" IsReadOnly="True"/>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Метод устранения дефекта" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" />
+                        <Controls:RadComboBox x:Name="ddlMethodUstrDef"  Margin="3" Grid.Column="1"
+							ItemsSource="{Binding DictListMetodUstr2}"
+							SelectedValue="{Binding SelectedMetodUstr2}"
+							 VerticalAlignment="Center"  HorizontalAlignment="Stretch"
+							DisplayMemberPath="Name" IsReadOnly="True" IsEnabled="False" />
+                    </Grid>
+                </Grid>
+            </GroupBox>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Margin="5" Grid.Column="0" BorderBrush="#FF999A9C">
+                <GroupBox.Header>
+                    <Label  Content="Геометрия" Foreground="#FF555454" Background="Transparent" FontWeight="Bold"/>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Длина, мм " HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center"   />
+                        <!--<TextBox Grid.Column="1" x:Name="txtLong"  Text="{Binding W}" VerticalAlignment="Center" Margin="3"/>-->
+                        <TextBox  Grid.Column="1" x:Name="txtLong"  VerticalAlignment="Center" Margin="3" >
+                            <TextBox.Text>
+                                <Binding Path="W" NotifyOnValidationError="True" ValidatesOnDataErrors="True" ValidatesOnExceptions="True" >
+                                    <Binding.ValidationRules>
+                                        <dataModel:DoubleRangeRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                            <!--Text="{Binding Value,  NotifyOnValidationError=True, ValidatesOnDataErrors=True, ValidatesOnExceptions=True }" 
+                                  VerticalAlignment="Center" Margin="3"/>-->
+                        </TextBox>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Ширина, мм"  HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" />
+                        <TextBox x:Name="txtWidth"  Grid.Column="1"  VerticalAlignment="Center" Margin="3" >
+                            <TextBox.Text>
+                                <Binding Path="H" NotifyOnValidationError="True" ValidatesOnDataErrors="True" ValidatesOnExceptions="True" >
+                                    <Binding.ValidationRules>
+                                        <dataModel:DoubleRangeRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <!--Text="{Binding Value,  NotifyOnValidationError=True, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" 
+                                 VerticalAlignment="Center" Margin="3"/>-->
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Глубина, мм" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" />
+                        <TextBox  Grid.Column="1" x:Name="txtDeep"  VerticalAlignment="Center" Margin="3" LostFocus="TxtDeep_OnLostFocus" >
+                            <TextBox.Text>
+                                <Binding Path="Depth" NotifyOnValidationError="True" ValidatesOnDataErrors="True" ValidatesOnExceptions="True" >
+                                    <Binding.ValidationRules>
+                                        <dataModel:DoubleRangeRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <!--Text="{Binding Value,  NotifyOnValidationError=True, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" 
+                                  VerticalAlignment="Center" Margin="3"/>-->
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Потери металла, %" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" />
+                        <TextBox  Grid.Column="1" x:Name="txtLostOfMetall" Text="{Binding LossMetal}" VerticalAlignment="Center" Margin="3" IsEnabled="False"/>
+                    </Grid>
+                </Grid>
+
+            </GroupBox>
+            <GroupBox Margin="5" Grid.Column="1" BorderBrush="#FF999A9C">
+                <GroupBox.Header>
+                    <Label  Content="Расстояние, м" Foreground="#FF555454" Background="Transparent" FontWeight="Bold"/>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="до предыдущего сварного шва " HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" />
+                        <TextBox  Grid.Column="1" x:Name="txtPreviousSeam"  VerticalAlignment="Center" Margin="3" >
+                            <TextBox.Text>
+                                <Binding Path="PrevSeam_Dist" >
+                                    <Binding.ValidationRules>
+                                        <dataModel:DoubleRangeRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="до следующего сварного шва"  HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" />
+                        <TextBox  Grid.Column="1" x:Name="txtToNextSeam" Text="{Binding Next_Dist}"  VerticalAlignment="Center" Margin="3" IsEnabled="False"/>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="до предыдущего репера" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" />
+                        <TextBox  Grid.Column="1" x:Name="txtPreviousReper" Text="{Binding PrevMark_Dist}" VerticalAlignment="Center" Margin="3" IsEnabled="False"/>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="до следующего репера" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" />
+                        <TextBox  Grid.Column="1" x:Name="txtNextReper" Text="{Binding NextReper_Dist}" VerticalAlignment="Center" Margin="3" IsEnabled="False"/>
+                    </Grid>
+                </Grid>
+
+            </GroupBox>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Margin="5" Grid.Column="0" BorderBrush="#FF999A9C">
+                <GroupBox.Header>
+                    <Label  Content="Расположение на трубе" Foreground="#FF555454" Background="Transparent" FontWeight="Bold" />
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="37*"/>
+                        <ColumnDefinition Width="321*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="210"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Угловое расположение, час:" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" />
+                        <TextBox  Grid.Column="1" x:Name="txtAnglePlace" VerticalAlignment="Center" Margin="3" >
+                            <TextBox.Text>
+                                <Binding Path="Angle" >
+                                    <Binding.ValidationRules>
+                                        <dataModel:HourRangeRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <!--Text="{Binding Angle}" VerticalAlignment="Center" Margin="3"/>-->
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="210"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Расположение в толщине металла"  HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" />
+                        <Controls:RadComboBox x:Name="ddlPlaceInMetall" Grid.Column="1" Margin="3" 
+							ItemsSource="{Binding DictListDepthPos}"
+							SelectedValue="{Binding SelectedDepthPos}"
+							DisplayMemberPath="Name" 
+							VerticalAlignment="Center"  HorizontalAlignment="Stretch"/>
+                    </Grid>
+
+                </Grid>
+            </GroupBox>
+            <GroupBox Margin="5" Grid.Column="1" BorderBrush="#FF999A9C">
+                <GroupBox.Header>
+                    <Label Content="Общие характеристики" Foreground="#FF555454" Background="Transparent" FontWeight="Bold" />
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="37*"/>
+                        <ColumnDefinition Width="321*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="230"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Описание стресс-коррозии" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" />
+                        <TextBox  Grid.Column="1" x:Name="txtStressKorrDescription"  Text="{Binding Stress_Koor}" VerticalAlignment="Center" Margin="3"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="230"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Метод устранения (рекомендуемый)"  HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" />
+                        <Controls:RadComboBox x:Name="ddlMethodOfRepear"  Margin="3" Grid.Column="1" 
+							ItemsSource="{Binding DictListMetodUstr}"
+							SelectedValue="{Binding SelectedMetodUstr}"
+							DisplayMemberPath="Name" 
+							VerticalAlignment="Center"  HorizontalAlignment="Stretch"/>
+                    </Grid>
+
+                </Grid>
+            </GroupBox>
+        </Grid>
+
+        <Button Grid.Row="4" x:Name="btnCreatePassport"  
+                HorizontalAlignment="Right" Click="btnCreatePassport_Click" Margin="0,0,5,0"
+                Foreground="#FFD4D4D4" BorderBrush="#FFD4D4D4" Background="WhiteSmoke" ToolTip="Сохранить паспорт">
+            <Button.Content>
+                <Image  Source="/DEFCALC;component/ImagesIcon/ok.png"  />
+            </Button.Content>
+        </Button>
+        <Button   Grid.Row="4" x:Name="btnCancel" 
+                  Margin="0,0,70,0" Click="btnCancel_Click" HorizontalAlignment="Right" 
+                  Foreground="#FFD4D4D4" BorderBrush="#FFD4D4D4" Background="WhiteSmoke" ToolTip="Выйти без сохранения">
+            <Button.Content>
+                <Image  Source="/DEFCALC;component/ImagesIcon/cancel.png"  />
+            </Button.Content>
+
+        </Button>
+
+        <!--<TextBox x:Name="txtjava" Grid.Row="8"/>-->
+    </Grid>
+</Window>
+<!--SelectedItem="{Binding SelectedTypeDefect}"-->

@@ -1,0 +1,235 @@
+﻿<Window x:Class="DEFCALC.SelectPipe"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:telerik="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Data" 
+        xmlns:telerikGridView="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView" 
+        xmlns:Control="clr-namespace:DrawPipe.View.Control;assembly=DrawPipe" 
+         Icon="/Images/app_icon.ico" xmlns:my="clr-namespace:System;assembly=mscorlib"
+        xmlns:Controls1="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls"
+        xmlns:data="clr-namespace:Telerik.Windows.Data;assembly=Telerik.Windows.Data"
+        Title="Модуль по расчетам дефектов в шурфе" MinHeight="600" MinWidth="800"
+        Loaded="Window_Loaded"
+        Unloaded="Window_UnLoaded"
+         WindowStartupLocation="CenterScreen" 
+       >
+    <Grid x:Name="grdSelectPipe">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="130"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="54"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text=" Выбор трубы " VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         Foreground="#FF555454" FontSize="18" FontWeight="Bold" />
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Margin="5,0,5,5" BorderBrush="#FF999A9C">
+                <GroupBox.Header>
+                    <Label Foreground="#FF555454" Background="Transparent" FontWeight="Bold" >Выбор трубы</Label>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="25"/>
+
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblTitleBoxM" Text="Номер трубы по ВТД: "   VerticalAlignment="Center" Margin="5" 
+                                   HorizontalAlignment="Right"  
+                                   Foreground="#FF555454" Background="Transparent" FontWeight="Bold"/>
+                        <TextBox x:Name="tbNumberPipe" Grid.Column="1"  Margin="5" />
+                    </Grid>
+                    <Grid  Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblTitleBoxN" Text="Километраж трубы (км): "  VerticalAlignment="Center" Margin="5" 
+                                 Foreground="#FF555454" Background="Transparent" FontWeight="Bold"  HorizontalAlignment="Right" />
+                        <TextBox x:Name="tbKmPipe"  Grid.Column="1"  Margin="5"/>
+                    </Grid>
+                    <Button x:Name="btnFindPipe" Grid.Row="2"   HorizontalAlignment="Right" Click="BtnFindPipe_OnClick" Margin="0,0,5,0"
+                            Foreground="#FFD4D4D4" BorderBrush="#FFD4D4D4" Background="WhiteSmoke" ToolTip="Выбрать">
+                        <Button.Content>
+                            <Image  Source="/DEFCALC;component/ImagesIcon/ok_small.png"  />
+                        </Button.Content>
+                    </Button>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox  Grid.Column="1" Margin="5,0,5,5"  BorderBrush="#FF999A9C" >
+                <GroupBox.Header>
+                    <Label Foreground="#FF555454" Background="Transparent" FontWeight="Bold" >Характеристика участка</Label>
+                </GroupBox.Header>
+                <StackPanel HorizontalAlignment="Left" Grid.Column="1">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Участок: " VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" Foreground="#FF555454" Background="Transparent" FontWeight="Bold"  />
+                        <TextBlock Text="{Binding SelectRegion}"  HorizontalAlignment="Left" Margin="59,0,0,0"  />
+                        <TextBlock Text="Номера труб по ВТД: " Grid.Row="1" HorizontalAlignment="Left" Margin="5,5,0,3" Foreground="#FF555454" Background="Transparent" FontWeight="Bold" />
+                        <TextBlock Text="{Binding LblNumberPipeRegion}" Grid.Row="1" HorizontalAlignment="Left" Margin="135,5,0,3"   />
+                        <TextBlock Text="Километраж участка: " Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,3" Foreground="#FF555454" Background="Transparent" FontWeight="Bold" />
+                        <TextBlock Text="{Binding LblKmRegion}" Grid.Row="2" HorizontalAlignment="Left" Margin="140,5,0,3"  />
+                    </Grid>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+        <Border  Grid.Row="2" BorderBrush="#FF999A9C" Margin="5,0,5,5" CornerRadius="1"
+				                    BorderThickness="1" Background="White">
+            <Control:PipeControl x:Name="pipeControl" DataContext="{Binding PipeModel}"/>
+
+        </Border>
+        <telerikGridView:RadGridView x:Name="rgrvSelectPipe" Grid.Row="3"
+                                         ItemsSource="{Binding GridPipeList}" 
+                                         SelectionUnit="FullRow"
+                                         HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                         RowIndicatorVisibility="Collapsed" 
+                                         SelectionMode="Multiple"
+                                         IsReadOnly="True" 
+                                         AutoGenerateColumns="False" 
+                                         ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                                         Controls1:StyleManager.Theme="Transparent"
+                                         BorderBrush="Silver" 
+                                         Background="White" 
+                                         ShowColumnFooters="False"
+                                         VerticalGridLinesBrush="Silver" 
+                                         HorizontalGridLinesBrush="Silver" 
+                                         AllowDrop="False"
+                                         ColumnWidth="*" 
+                                         SelectionChanged="rgrvSelectPipe_SelectionChanged"
+                                         IsSynchronizedWithCurrentItem="True" 
+                                         AlternationCount="2" 
+                                         AlternateRowBackground="#3FCBF1D4">
+
+
+            <telerikGridView:RadGridView.Columns>
+                <telerikGridView:GridViewSelectColumn />
+                <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding KEYPIPE}" Header="Ключ трубы " IsVisible="False" />
+                <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding NUMBERPIPE}" >
+                    <!--<telerikGridView:GridViewDataColumn.AggregateFunctions>
+                        <data:CountFunction ResultFormatString="{}Всего: {0}" />
+                    </telerikGridView:GridViewDataColumn.AggregateFunctions>-->
+                    <telerikGridView:GridViewDataColumn.Header>
+                        <TextBlock Text="Номер трубы" ToolTipService.ToolTip="Номер трубы"/>
+                    </telerikGridView:GridViewDataColumn.Header>
+                </telerikGridView:GridViewDataColumn>
+                <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding KM}">
+                    <telerikGridView:GridViewDataColumn.Header>
+                        <TextBlock Text="Километраж (км)" ToolTipService.ToolTip="Километраж (км)"/>
+                    </telerikGridView:GridViewDataColumn.Header>
+                </telerikGridView:GridViewDataColumn>
+                <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding ANGLESHOV}">
+                    <telerikGridView:GridViewDataColumn.Header>
+                        <TextBlock Text="Угол шва" ToolTipService.ToolTip="Угол шва"/>
+                    </telerikGridView:GridViewDataColumn.Header>
+                </telerikGridView:GridViewDataColumn>
+                <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding MAXDEPTHDEF}" >
+                    <telerikGridView:GridViewDataColumn.Header>
+                        <TextBlock Text="Глубина дефекта(мм)" ToolTipService.ToolTip="Глубина дефекта(мм)"/>
+                    </telerikGridView:GridViewDataColumn.Header>
+                </telerikGridView:GridViewDataColumn>
+                <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding MAXSQRDEF}"  >
+                    <telerikGridView:GridViewDataColumn.Header>
+                        <TextBlock Text="Площадь дефекта (кв.м)" ToolTipService.ToolTip="Площадь дефекта (кв.м)"/>
+                    </telerikGridView:GridViewDataColumn.Header>
+                </telerikGridView:GridViewDataColumn>
+                <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding LENGHT}" >
+                    <telerikGridView:GridViewDataColumn.Header>
+                        <TextBlock Text="Длина (м)" ToolTipService.ToolTip="Длина (м)"/>
+                    </telerikGridView:GridViewDataColumn.Header>
+                </telerikGridView:GridViewDataColumn>
+                <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding DEPTHPIPE}" >
+                    <telerikGridView:GridViewDataColumn.Header>
+                        <TextBlock Text="Толщина стенки (мм)" ToolTipService.ToolTip="Толщина стенки (мм)"/>
+                    </telerikGridView:GridViewDataColumn.Header>
+                </telerikGridView:GridViewDataColumn>
+                <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding NUMBERDEFECT}"  >
+                    <telerikGridView:GridViewDataColumn.Header>
+                        <TextBlock Text="Количество дефектов (шт)" ToolTipService.ToolTip="Количество дефектов (шт)"/>
+                    </telerikGridView:GridViewDataColumn.Header>
+                </telerikGridView:GridViewDataColumn>
+                <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding NUMBERAKT}">
+                    <telerikGridView:GridViewDataColumn.Header>
+                        <TextBlock Text="Номер акта" ToolTipService.ToolTip="Номер акта"/>
+                    </telerikGridView:GridViewDataColumn.Header>
+                </telerikGridView:GridViewDataColumn>
+            </telerikGridView:RadGridView.Columns>
+        </telerikGridView:RadGridView>
+        <!--<telerik:RadDataPager x:Name="radDataPager"
+                                              DisplayMode="All"
+                                              Source="{Binding Items, ElementName=rgrvSelectPipe}" 
+                                              PageSize="25"
+                                              Margin="8,0,8,8" VerticalAlignment="Bottom" />-->
+        <!--<telerik:RadDataPager x:Name="radDataPager" VerticalAlignment="Top" 
+                            
+                            PageSize="50"
+                            Margin="0,0,0,0" />-->
+      
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnCancel"   Margin="5,5,0,5" Click="btnCancel_Click" 
+                    Foreground="#FFD4D4D4" BorderBrush="#FFD4D4D4" Background="WhiteSmoke" ToolTip="Отменить "  HorizontalAlignment="Left">
+                <Button.Content>
+                    <Image  Source="/DEFCALC;component/ImagesIcon/left.png"  />
+                </Button.Content>
+            </Button>
+            <Button x:Name="btnCreateAct"  Grid.Column="1" Margin="0,5,5,5" Click="btnCreateAct_Click" 
+                    Foreground="#FFD4D4D4" BorderBrush="#FFD4D4D4" Background="WhiteSmoke" ToolTip="Создать акт "  HorizontalAlignment="Right">
+                <Button.Content>
+                    <Image  Source="/DEFCALC;component/ImagesIcon/right.png"  />
+                </Button.Content>
+            </Button>
+        </Grid>
+        <ScrollViewer x:Name="scrollMain" Grid.Row="5" HorizontalAlignment="Stretch"
+                                               VerticalAlignment="Stretch">
+
+            <ListBox x:Name="reportListBox"
+                                         Grid.Row="5"
+                                         Visibility="Visible"
+                                         ItemsSource="{Binding Reports}"
+                                         HorizontalAlignment="Stretch"
+                                         SelectionMode="Multiple"  />
+
+        </ScrollViewer>
+    </Grid>
+</Window>
+<!--SelectedItem="{Binding SelectedGridPipeList}"-->
+<!--<ListBox x:Name="keyPipe" ItemsSource="{Binding SelectedItems, ElementName=rgrvSelectPipe}"
+                     DisplayMemberPath="KEYPIPE"
+                    Width="100"  Height="20" Visibility="Visible" />-->
+
+
+<!--SelectedItem="{Binding ElementName=txtKm, Path=Text, Mode=TwoWay}"-->
+<!--<TextBox x:Name="txtKm" Width="100"  Height="20" VerticalAlignment="Center"   />-->
+<!--<ListBox x:Name="txtKm" Width="100"  Height="20" ItemsSource ="{Binding GetKmPipe}  Text="{Binding GetKmPipe}"" >
+            </ListBox>-->
+<!--<TextBox x:Name="txtNumberPipe" Width="100"  Height="20"/>-->
+
+<!--<DockPanel Grid.Row="4">
+            <Button x:Name="btnCancel"  Margin="5" HorizontalAlignment="Left" Click="btnCancel_Click"
+                    Foreground="#FFD4D4D4" BorderBrush="#FFD4D4D4" Background="WhiteSmoke" ToolTip="Отменить ">
+                <Button.Content>
+                    <Image  Source="/DEFCALC;component/ImagesIcon/left.png"  />
+                </Button.Content>
+            </Button>
+            <Button x:Name="btnCreateAct" Content="Создать акт"   Width="200" Margin="5" HorizontalAlignment="Right" Click="btnCreateAct_Click"></Button>
+        </DockPanel>-->

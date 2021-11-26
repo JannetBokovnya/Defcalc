@@ -1,0 +1,56 @@
+﻿<Window x:Class="DEFCALC.ListOfActs"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input" 
+        xmlns:telerikGridView="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView" 
+        xmlns:telerik="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Data" 
+        xmlns:Controls1="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls" 
+        Loaded="Window_Loaded"
+        Title="Список актов" Height="600" Width="900" 
+        WindowStartupLocation="CenterScreen" 
+        Icon="/Images/app_icon.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="37"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" x:Name="lblSelectedSite" Text="МГ Союз, КС Уральск - граница с Чижинским ЛПУ, 247 км - 315 км" Margin="10"></TextBlock>
+        <!--<StackPanel Grid.Row="1" Orientation="Vertical">
+            <telerikGridView:RadGridView x:Name="rgrvListAct" 
+                                         ItemsSource="{Binding GridActList}" 
+                                          Controls1:StyleManager.Theme="Transparent"
+                                         VerticalAlignment="Top" IsReadOnly="True" 
+                                         BorderBrush="Silver" 
+                                         Background="White" 
+                                         AlternateRowBackground="White" 
+                                         VerticalGridLinesBrush="Silver" 
+                                         HorizontalGridLinesBrush="Silver" 
+                                         ColumnWidth="*"
+                                         SelectionUnit="FullRow"
+                                         AutoGenerateColumns="False" ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                                         CanUserDeleteRows="False" CanUserInsertRows="False" 
+                                         SelectedItem="{Binding SelectedgridAct}"
+                                         IsSynchronizedWithCurrentItem="True">
+                <telerikGridView:RadGridView.Columns>
+                    <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding KEYACT}" Header="Ключ шурфа"  IsVisible="False"/>
+                    <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding NUMBERACT}" Header="Номер акта" />
+                    <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding DATAACT}" Header="Дата шурфа" />
+                    <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding KMAKT}" Header="Километраж" />
+                    <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding NUMBERPIPE}" Header="Номер трубы" />
+                    <telerikGridView:GridViewDataColumn DataMemberBinding="{Binding DEFECTOSKOPIST}" Header="Дефектоскопист" />
+                </telerikGridView:RadGridView.Columns>
+            </telerikGridView:RadGridView>
+            <telerik:RadDataPager x:Name="radDataPager" VerticalAlignment="Top"
+                            DisplayMode="All"
+                            PageSize="50"
+                            Margin="0,0,0,0" />
+        </StackPanel>-->
+        <DockPanel Grid.Row="2">
+            <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button x:Name="btnOpenActShurfovaniya" Content="Открыть акт" Width="200" Margin="5" Click="btnOpenActShurfovaniya_Click"></Button>
+                <Button x:Name="btnCancel" Content="Отменить" Width="200" Margin="5" Click="btnCancel_Click"></Button>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>

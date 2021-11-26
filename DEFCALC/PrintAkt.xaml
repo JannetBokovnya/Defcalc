@@ -1,0 +1,449 @@
+﻿<Window x:Class="DEFCALC.PrintAkt"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:telerikQuickStart="clr-namespace:Telerik.Windows.Controls.QuickStart;assembly=Telerik.Windows.Controls"     
+        xmlns:RichTextBoxUI="clr-namespace:Telerik.Windows.Controls.RichTextBoxUI;assembly=Telerik.Windows.Controls.RichTextBoxUI" 
+        xmlns:telerik="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Documents" 
+        xmlns:Model="clr-namespace:Telerik.Windows.Documents.Model;assembly=Telerik.Windows.Documents" 
+        xmlns:Controls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation" 
+        xmlns:Controls1="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls" 
+        xmlns:telerikRibbonView="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.RibbonView"
+        xmlns:quickStart="clr-namespace:Telerik.Windows.Controls.QuickStart;assembly=Telerik.Windows.Controls"
+        xmlns:Control="clr-namespace:DrawPipe.View.Control;assembly=DrawPipe"
+        Loaded="Window_Loaded"
+        Title="Печать" Height="600" Width="800">
+
+    <!--<telerikQuickStart:QuickStart.ExampleHeader>
+        <TextBlock Text="Document Protection" Margin="8" />
+    </telerikQuickStart:QuickStart.ExampleHeader>-->
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition  Height="*" />
+            <RowDefinition  Height="0" />
+
+        </Grid.RowDefinitions>
+
+
+        <Controls:RadToolBar Grid.Row="0" >
+            <!--<Controls1:RadButton Name="buttonOpen" 
+                                   HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   Width="Auto" Height="24" Margin="10 2" CornerRadius="3"
+                                   Click="buttonOpen_Click">
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Margin="0, 0, 6, 0" VerticalAlignment="Center">Open</TextBlock>
+                </StackPanel>
+            </Controls1:RadButton>-->
+            <!--<Controls:RadToolBarSeparator />-->
+            <StackPanel Orientation="Vertical" Grid.Row="1">
+                <Controls:RadMenu x:Name="radMenu" ClickToOpen="False" DataContext="{Binding Path=Commands, ElementName=richTextBox}"
+                             VerticalAlignment="Top" HorizontalAlignment="Stretch" BorderBrush="#A9000000" Background="#1C000400">
+                    <Controls:RadMenuItem Header="Файл">
+                        <Controls:RadMenuItem  Command="{Binding Path=SaveCommand }" Header="Сохранить" >
+                            <!--<Controls:RadMenuItem.Icon>
+                                <Image Source="/Telerik.Windows.Controls.RichTextBoxUI;component/Images/MSOffice/32/new.png" Stretch="Fill" />
+                            </Controls:RadMenuItem.Icon>-->
+                        </Controls:RadMenuItem>
+                        <Controls:RadMenuItem  Command="{Binding Path=PrintCommand}" CommandParameter="Native" Header="Печать" >
+                            <!--<Controls:RadMenuItem.Icon>
+                                <Image Source="/Telerik.Windows.Controls.RichTextBoxUI;component/Images/MSOffice/ApplicationMenu/print.png" Stretch="Fill" />
+                            </Controls:RadMenuItem.Icon>-->
+                        </Controls:RadMenuItem>
+                    </Controls:RadMenuItem>
+                </Controls:RadMenu>
+            </StackPanel>
+        </Controls:RadToolBar>
+        <telerik:RadRichTextBox Grid.Row="1" x:Name="richTextBox" IsSpellCheckingEnabled="False" Margin="0,18,0,10" Grid.RowSpan="2"  >
+            <t:RadDocument xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+               xmlns:t="clr-namespace:Telerik.Windows.Documents.Model;assembly=Telerik.Windows.Documents" 
+               xmlns:s="clr-namespace:Telerik.Windows.Documents.Model.Styles;assembly=Telerik.Windows.Documents" 
+               DefaultTabWidth="47.2" LayoutMode="Paged" LineSpacing="1.15" LineSpacingType="Auto" 
+               ParagraphDefaultSpacingAfter="13.3333330154419" ParagraphDefaultSpacingBefore="0" 
+               SectionDefaultPageSize="816,1056" StyleName="defaultDocumentStyle" >
+                <t:RadDocument.Captions>
+                    <t:CaptionDefinition IsDefault="True" IsLinkedToHeading="False" Label="Figure" LinkedHeadingLevel="0" NumberingFormat="Arabic" SeparatorType="Hyphen" />
+                    <t:CaptionDefinition IsDefault="True" IsLinkedToHeading="False" Label="Table" LinkedHeadingLevel="0" NumberingFormat="Arabic" SeparatorType="Hyphen" />
+                </t:RadDocument.Captions>
+                <t:RadDocument.ProtectionSettings>
+                    <t:DocumentProtectionSettings EnableDocumentProtection="False" Enforce="False" HashingAlgorithm="None" HashingSpinCount="0" ProtectionMode="ReadOnly" />
+                </t:RadDocument.ProtectionSettings>
+                <t:RadDocument.Styles>
+                    <s:StyleDefinition DisplayName="Normal" IsCustom="False" IsDefault="True" IsPrimary="True" Name="a" Type="Paragraph" />
+                    <s:StyleDefinition DisplayName="Default Paragraph Font" IsCustom="False" IsDefault="True" IsPrimary="False" Name="a0" Type="Character" />
+                    <s:StyleDefinition DisplayName="Normal Table" IsCustom="False" IsDefault="True" IsPrimary="False" Name="a1" Type="Table">
+                        <s:StyleDefinition.TableStyle>
+                            <s:TableProperties CellPadding="7,0,7,0" />
+                        </s:StyleDefinition.TableStyle>
+                    </s:StyleDefinition>
+                    <s:StyleDefinition DisplayName="No List" IsCustom="False" IsDefault="True" IsPrimary="False" Name="a2" Type="Numbering" />
+                    <s:StyleDefinition BasedOnName="a0" DisplayName="Текст выноски Знак" IsCustom="True" IsDefault="False" IsPrimary="False" LinkedStyleName="a3" Name="a4" Type="Character">
+                        <s:StyleDefinition.SpanStyle>
+                            <s:SpanProperties FontFamily="Tahoma" FontSize="10.6666669845581" />
+                        </s:StyleDefinition.SpanStyle>
+                    </s:StyleDefinition>
+                    <s:StyleDefinition BasedOnName="a0" DisplayName="Верхний колонтитул Знак" IsCustom="True" IsDefault="False" IsPrimary="False" LinkedStyleName="a5" Name="a6" Type="Character" />
+                    <s:StyleDefinition BasedOnName="a0" DisplayName="Нижний колонтитул Знак" IsCustom="True" IsDefault="False" IsPrimary="False" LinkedStyleName="a7" Name="a8" Type="Character" />
+                    <s:StyleDefinition DisplayName="Document Default Style" IsCustom="False" IsDefault="False" IsPrimary="True" Name="defaultDocumentStyle" Type="Default">
+                        <s:StyleDefinition.ParagraphStyle>
+                            <s:ParagraphProperties FirstLineIndent="0" LeftIndent="0" LineSpacing="1.15" LineSpacingType="Auto" RightIndent="0" SpacingAfter="13.3333330154419" SpacingBefore="0" TextAlignment="Left" />
+                        </s:StyleDefinition.ParagraphStyle>
+                        <s:StyleDefinition.SpanStyle>
+                            <s:SpanProperties FlowDirection="LeftToRight" FontFamily="Calibri" FontSize="14.6666669845581" ForeColor="#FF000000" ThemeFontFamily="minor" />
+                        </s:StyleDefinition.SpanStyle>
+                    </s:StyleDefinition>
+                    <s:StyleDefinition DisplayName="Heading 1 Char" IsCustom="True" IsDefault="False" IsPrimary="False" LinkedStyleName="Heading1" Name="Heading1Char" Type="Character">
+                        <s:StyleDefinition.SpanStyle>
+                            <s:SpanProperties FontSize="18.6666660308838" FontWeight="Bold" ForeColor="#FF4F81BD" ThemeFontFamily="major" ThemeForeColor="accent1" />
+                        </s:StyleDefinition.SpanStyle>
+                    </s:StyleDefinition>
+                    <s:StyleDefinition DisplayName="Heading 2 Char" IsCustom="True" IsDefault="False" IsPrimary="False" LinkedStyleName="Heading2" Name="Heading2Char" Type="Character">
+                        <s:StyleDefinition.SpanStyle>
+                            <s:SpanProperties FontSize="17.3333339691162" FontWeight="Bold" ForeColor="#FF4F81BD" ThemeFontFamily="major" ThemeForeColor="accent1" />
+                        </s:StyleDefinition.SpanStyle>
+                    </s:StyleDefinition>
+                    <s:StyleDefinition DisplayName="Heading 3 Char" IsCustom="True" IsDefault="False" IsPrimary="False" LinkedStyleName="Heading3" Name="Heading3Char" Type="Character">
+                        <s:StyleDefinition.SpanStyle>
+                            <s:SpanProperties FontWeight="Bold" ForeColor="#FF4F81BD" ThemeFontFamily="major" ThemeForeColor="accent1" />
+                        </s:StyleDefinition.SpanStyle>
+                    </s:StyleDefinition>
+                    <s:StyleDefinition DisplayName="Heading 4 Char" IsCustom="True" IsDefault="False" IsPrimary="False" LinkedStyleName="Heading4" Name="Heading4Char" Type="Character">
+                        <s:StyleDefinition.SpanStyle>
+                            <s:SpanProperties FontStyle="Italic" FontWeight="Bold" ForeColor="#FF4F81BD" ThemeFontFamily="major" ThemeForeColor="accent1" />
+                        </s:StyleDefinition.SpanStyle>
+                    </s:StyleDefinition>
+                    <s:StyleDefinition DisplayName="Heading 5 Char" IsCustom="True" IsDefault="False" IsPrimary="False" LinkedStyleName="Heading5" Name="Heading5Char" Type="Character">
+                        <s:StyleDefinition.SpanStyle>
+                            <s:SpanProperties ForeColor="#FF4F81BD" ThemeFontFamily="major" ThemeForeColor="accent1" />
+                        </s:StyleDefinition.SpanStyle>
+                    </s:StyleDefinition>
+                    <s:StyleDefinition DisplayName="Heading 6 Char" IsCustom="True" IsDefault="False" IsPrimary="False" LinkedStyleName="Heading6" Name="Heading6Char" Type="Character">
+                        <s:StyleDefinition.SpanStyle>
+                            <s:SpanProperties FontStyle="Italic" ForeColor="#FF4F81BD" ThemeFontFamily="major" ThemeForeColor="accent1" />
+                        </s:StyleDefinition.SpanStyle>
+                    </s:StyleDefinition>
+                    <s:StyleDefinition DisplayName="Heading 7 Char" IsCustom="True" IsDefault="False" IsPrimary="False" LinkedStyleName="Heading7" Name="Heading7Char" Type="Character">
+                        <s:StyleDefinition.SpanStyle>
+                            <s:SpanProperties FontStyle="Italic" ForeColor="#FF000000" ThemeFontFamily="major" ThemeForeColor="text1" />
+                        </s:StyleDefinition.SpanStyle>
+                    </s:StyleDefinition>
+                    <s:StyleDefinition DisplayName="Heading 8 Char" IsCustom="True" IsDefault="False" IsPrimary="False" LinkedStyleName="Heading8" Name="Heading8Char" Type="Character">
+                        <s:StyleDefinition.SpanStyle>
+                            <s:SpanProperties FontSize="13.3333330154419" ForeColor="#FF000000" ThemeFontFamily="major" ThemeForeColor="text1" />
+                        </s:StyleDefinition.SpanStyle>
+                    </s:StyleDefinition>
+                    <s:StyleDefinition DisplayName="Heading 9 Char" IsCustom="True" IsDefault="False" IsPrimary="False" LinkedStyleName="Heading9" Name="Heading9Char" Type="Character">
+                        <s:StyleDefinition.SpanStyle>
+                            <s:SpanProperties FontSize="13.3333330154419" FontStyle="Italic" ForeColor="#FF000000" ThemeFontFamily="major" ThemeForeColor="text1" />
+                        </s:StyleDefinition.SpanStyle>
+                    </s:StyleDefinition>
+                    <s:StyleDefinition DisplayName="Normal" IsCustom="False" IsDefault="True" IsPrimary="True" Name="Normal" Type="Paragraph" />
+                    <s:StyleDefinition DisplayName="TableNormal" IsCustom="False" IsDefault="True" IsPrimary="True" Name="TableNormal" Type="Table" />
+                </t:RadDocument.Styles>
+                <t:RadDocument.Theme>
+                    <t:Theme xmlns:t="clr-namespace:Telerik.Windows.Documents.Model.Themes;assembly=Telerik.Windows.Documents">
+                        <t:Theme.ThemeColors>
+                            <t:ThemeColors Accent1="#FF4F81BD" Accent2="#FFC0504D" Accent3="#FF9BBB59" Accent4="#FF8064A2" Accent5="#FF4BACC6" Accent6="#FFF79646" Dark1="#FF000000" Dark2="#FF1F497D" FollowedHyperlink="#FF800080" Hyperlink="#FF0000FF" Light1="#FFFFFFFF" Light2="#FFEEECE1" Name="Стандартная" />
+                        </t:Theme.ThemeColors>
+                        <t:Theme.ThemeFonts>
+                            <t:ThemeFonts Major="Cambria" Minor="Calibri" Name="Стандартная" />
+                        </t:Theme.ThemeFonts>
+                    </t:Theme>
+                </t:RadDocument.Theme>
+                <t:Section PageMargin="113,56,56,56" PageSize="793.733337402344,1122.53332519531">
+                    <t:Section.Headers>
+                        <t:Headers>
+                            <t:Headers.Default>
+                                <t:Header IsLinkedToPrevious="False">
+                                    <t:Header.Body>
+                                        <t:RadDocument LayoutMode="Flow" LineSpacing="1.15" LineSpacingType="Auto" ParagraphDefaultSpacingAfter="13.3333330154419" ParagraphDefaultSpacingBefore="0" SectionDefaultPageSize="816,1056" StyleName="defaultDocumentStyle">
+                                            <t:RadDocument.ProtectionSettings>
+                                                <t:DocumentProtectionSettings EnableDocumentProtection="False" Enforce="False" HashingAlgorithm="None" HashingSpinCount="0" ProtectionMode="ReadOnly" />
+                                            </t:RadDocument.ProtectionSettings>
+                                            <t:Section>
+                                                <t:Paragraph FontSize="21.3333339691162" LineSpacing="1" LineSpacingType="Auto" SpacingAfter="0">
+                                                    <t:Span FontFamily="Impact" FontSize="53.3333320617676" FontWeight="Bold" Text="ICA" />
+                                                    <t:Span FontFamily="Impact" FontSize="21.3333339691162" Text="&#x9;&#x9;&#x9;ИНТЕРГАЗ  ЦЕНТРАЛЬНАЯ  АЗИЯ" />
+                                                </t:Paragraph>
+                                                <t:Paragraph FontSize="8" LineSpacing="1" LineSpacingType="Auto" SpacingAfter="16">
+                                                    <t:Span FontFamily="Impact" FontSize="8" Text="INTERGASCENTRALASIA" />
+                                                </t:Paragraph>
+                                            </t:Section>
+                                        </t:RadDocument>
+                                    </t:Header.Body>
+                                    <t:Header.WatermarkSettings>
+                                        <t:DocumentWatermarkSettings Type="NoWatermark" />
+                                    </t:Header.WatermarkSettings>
+                                </t:Header>
+                            </t:Headers.Default>
+                        </t:Headers>
+                    </t:Section.Headers>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="16" TextAlignment="Center">
+                        <t:Span  FontFamily="Times New Roman" FontWeight="Bold" Text="АКТ № "  />
+                        <t:Span  FontFamily="Times New Roman" FontWeight="Bold" UnderlineDecoration="Line"  Text="   "  />
+                        <t:Span  FontFamily="Times New Roman" FontWeight="Bold" UnderlineDecoration="Line"  Text="1aкт"  />
+                        <t:Span  FontFamily="Times New Roman" FontWeight="Bold" UnderlineDecoration="Line"  Text="    "  />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="16" TextAlignment="Center">
+                        <t:Span FontFamily="Times New Roman" FontWeight="Bold" Text="осмотра изоляции и метала трубы в шурфе" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="Газопровод " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="   "  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="2газ"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="    "  />
+                    </t:Paragraph>
+                    <t:Paragraph FontSize="12" LeftIndent="245.733337402344" LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" FontSize="12" Text="(наименование, нитка, диаметр)" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="1. Километр " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="   "  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="3км"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="    "  />
+                        <t:Span FontFamily="Times New Roman" Text="                    Номер трубы " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="   "  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="4нт"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="                        "  />
+                    </t:Paragraph>
+                    <t:Paragraph FontSize="12" LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4" TextAlignment="Right">
+                        <t:Span FontFamily="Times New Roman" FontSize="12" Text="(привязка в сущ. наземным ориентирам)" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="2. Дата ввода в эксплуатацию " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="   "  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="4data"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="                         "  />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="3. Характеристика рельефа местности " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="   "  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="4haracter"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="   "  />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="4. Характеристика грунта шурфа " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="   "  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="4grunt"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="   "  />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="5. Глубина заложения (до верха) трубы" />
+                        <t:Span FontFamily="Times New Roman" UnderlineDecoration="Line" Text="   " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="4gl"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="   " />
+                        <t:Span FontFamily="Times New Roman" Text="м" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="6. Удельное сопротивление грунта в месте шурфования" />
+                        <t:Span FontFamily="Times New Roman" UnderlineDecoration="Line" Text="   " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="4sop"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="    " />
+                        <t:Span FontFamily="Times New Roman" Text=" Ом/м" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="7. Потенциал трубы в месте шурфования" />
+                        <t:Span FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="   " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="4pot"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="    " />
+                        <t:Span FontFamily="Times New Roman" Text=" мВ" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="Высота шурфа " />
+                        <t:Span FontFamily="Times New Roman"  UnderlineDecoration="Line" Text="   " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="5hsh"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="             " />
+                        <t:Span FontFamily="Times New Roman" Text=" м" />
+                        <t:Span FontFamily="Times New Roman" Text="&#x9;&#x9;&#x9;Длина шурфа " />
+                        <t:Span FontFamily="Times New Roman"  UnderlineDecoration="Line" Text="   " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="5wsh"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="             " />
+                        <t:Span FontFamily="Times New Roman" Text=" м" />
+                    </t:Paragraph>
+
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span  FontFamily="Times New Roman"  Text="   "  />
+                    </t:Paragraph>
+
+                    <t:Paragraph  LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:ImageInline  Height="132.4" 
+                                        RotateAngle="0" Width="529" />
+
+                    </t:Paragraph>
+
+                    <t:Paragraph FontSize="12" LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" FontSize="12" Text="&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;----> ход газа" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="8.Уровень грунтовых вод" />
+                        <t:Span FontFamily="Times New Roman"  UnderlineDecoration="Line" Text="   " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="5grwat"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="             " />
+                        <t:Span FontFamily="Times New Roman" Text="м" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="9. Тип изоляции" />
+                        <t:Span FontFamily="Times New Roman"  UnderlineDecoration="Line" Text="   " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="5typeizol"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="             " />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="10. Общее состояние защитного покрытия" />
+                        <t:Span FontFamily="Times New Roman"  UnderlineDecoration="Line" Text="   " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="5sostza"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="             " />
+                    </t:Paragraph>
+                    <t:Paragraph FirstLineIndent="47.2000007629395" LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="–" />
+                        <t:Span FontFamily="Times New Roman" Text=" " />
+                        <t:Span FontFamily="Times New Roman" Text="толщина" />
+                        <t:Span FontFamily="Times New Roman"  UnderlineDecoration="Line" Text="   " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="5tol"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text=" " />
+                    </t:Paragraph>
+                    <t:Paragraph FirstLineIndent="0.200000002980232" FontSize="12" LeftIndent="245.733337402344" LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" FontSize="12" Text="(количество слоев пленки, обертки, нахлест)" />
+                    </t:Paragraph>
+                    <t:Paragraph FirstLineIndent="47.2000007629395" LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="–" />
+                        <t:Span FontFamily="Times New Roman" Text=" " />
+                        <t:Span FontFamily="Times New Roman" Text="прилипаемость к трубе" />
+                        <t:Span FontFamily="Times New Roman"  UnderlineDecoration="Line" Text="   " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="5prilip"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text=" " />
+                    </t:Paragraph>
+                    <t:Paragraph FirstLineIndent="47.2000007629395" LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="–" />
+                        <t:Span FontFamily="Times New Roman" Text=" " />
+                        <t:Span FontFamily="Times New Roman" Text="наличие влаги под изоляцией" />
+                        <t:Span FontFamily="Times New Roman"  UnderlineDecoration="Line" Text="   " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="5vlaga"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text=" " />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="11. Осмотренная площадь металла трубы" />
+                        <t:Span FontFamily="Times New Roman"  UnderlineDecoration="Line" Text="   " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="5osmpl"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="                " />
+                        <t:Span FontFamily="Times New Roman" Text=" м" />
+                        <t:Span BaselineAlignment="Superscript" FontFamily="Times New Roman" Text="2" />
+                        <t:Span FontFamily="Times New Roman" Text=", где выявлены" />
+                    </t:Paragraph>
+                    <t:Paragraph FirstLineIndent="47.2000007629395" LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="–" />
+                        <t:Span FontFamily="Times New Roman" Text=" " />
+                        <t:Span FontFamily="Times New Roman" Text="площадь с продуктами коррозии" />
+                        <t:Span FontFamily="Times New Roman"  UnderlineDecoration="Line" Text="   " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="5prodkor"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="                " />
+                        <t:Span FontFamily="Times New Roman" Text=" м" />
+                        <t:Span BaselineAlignment="Superscript" FontFamily="Times New Roman" Text="2" />
+                    </t:Paragraph>
+                    <t:Paragraph FirstLineIndent="47.2000007629395" LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="–" />
+                        <t:Span FontFamily="Times New Roman" Text=" " />
+                        <t:Span FontFamily="Times New Roman" Text="наличие каверн (количество)" />
+                        <t:Span FontFamily="Times New Roman"  UnderlineDecoration="Line" Text="    " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="5countdef"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="                " />
+                        <t:Span FontFamily="Times New Roman" Text=" шт." />
+                    </t:Paragraph>
+                    <t:Paragraph FirstLineIndent="47.2000007629395" LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="–" />
+                        <t:Span FontFamily="Times New Roman" Text=" " />
+                        <t:Span FontFamily="Times New Roman" Text="глубина каверн от" />
+                        <t:Span FontFamily="Times New Roman"  UnderlineDecoration="Line" Text="    " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="5mixdepthdef"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="              " />
+                        <t:Span FontFamily="Times New Roman" Text=" до " />
+                        <t:Span FontFamily="Times New Roman"  UnderlineDecoration="Line" Text="    " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="5maxdepthdef"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="           " />
+                        <t:Span FontFamily="Times New Roman" Text="мм" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="12. Вид корозионного повреждения по п. 11 ______________________________________________" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman"  UnderlineDecoration="Line" Text="   " />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="5vidkor"  />
+                        <t:Span  FontFamily="Times New Roman" UnderlineDecoration="Line"  Text="                " />
+                        
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="13. Режим работы ближайших установок катодной защиты" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="СКЗ № _______" />
+                        <t:Span FontFamily="Times New Roman" Text=" " />
+                        <t:Span FontFamily="Times New Roman" Text=" I = _______ A  U = _______ B&#x9;СКЗ № _______" />
+                        <t:Span FontFamily="Times New Roman" Text=" " />
+                        <t:Span FontFamily="Times New Roman" Text=" I = _______ A  U = _______ B" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="14." />
+                        <t:Span FontFamily="Times New Roman" Text=" " />
+                        <t:Span FontFamily="Times New Roman" Text="Предварительное заключение ________________________________________________________" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="_____________________________________________________________________________________" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="_____________________________________________________________________________________" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="_____________________________________________________________________________________" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="_____________________________________________________________________________________" />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="Осмотр произведен «____» ____________ _______" />
+                        <t:Span FontFamily="Times New Roman" Text=" " />
+                        <t:Span FontFamily="Times New Roman" Text="г." />
+                    </t:Paragraph>
+                    <t:Paragraph LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="Подписи ___________________________ ______________________ __________________________" />
+                    </t:Paragraph>
+                    <t:Paragraph FirstLineIndent="0.200000002980232" FontSize="12" LeftIndent="245.733337402344" LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" FontSize="12" Text="(ФИО, должность производивших осмотр)" />
+                    </t:Paragraph>
+                    <t:Paragraph LeftIndent="60.466667175293" LineSpacing="1" LineSpacingType="Auto" SpacingAfter="4">
+                        <t:Span FontFamily="Times New Roman" Text="___________________________" />
+                        <t:Span FontFamily="Times New Roman" Text=" " />
+                        <t:Span FontFamily="Times New Roman" Text="______________________ __________________________" />
+                    </t:Paragraph>
+                </t:Section>
+            </t:RadDocument>
+        </telerik:RadRichTextBox>
+
+        <!--<Button Grid.Row="2" x:Name="btnCreatePassport" Click="btnCreatePassport_Click" Content="Печать" Width="200" Margin="5,31,5,5" ></Button>-->
+
+        <Canvas  Grid.Row="3" Margin="0,0,-10,-13">
+            <!--<Canvas Name="canvas" Background="LightCyan" Width="241" Height="235">
+                <Rectangle
+                   Canvas.Left="10" Canvas.Top="10"
+                    Height="155" Width="148"
+                    Stroke="Black" StrokeThickness="10" Fill="Red" />
+
+                <Rectangle
+                    Canvas.Left="43" Canvas.Top="49"
+                    Height="127" Width="133"
+                    Stroke="Black" StrokeThickness="10" Fill="Blue" />
+                <Rectangle
+     Canvas.Left="76" Canvas.Top="75"
+     Height="130" Width="142"
+     Stroke="Black" StrokeThickness="10" Fill="Green" />
+            </Canvas>-->
+            <Canvas Name="canvas" Background="White"  Width="540" Height="200" HorizontalAlignment="Stretch" Canvas.Left="10">
+                <Control:PipeControl x:Name="pipeControlPrint" DataContext="{Binding PipeModelPrint}" Height="208" Width="632" Canvas.Left="-50"/>
+            </Canvas>
+
+            <!--<Image  Height="229" Name="image1" Stretch="Fill" Width="253" Canvas.Left="330" Canvas.Top="6" />-->
+        </Canvas>
+    </Grid>
+</Window>
+
+
+<!--<t:Span FontFamily="Times New Roman" Text="1. Километр _______________&#x9;&#x9;Номер трубы __________________________________" />-->

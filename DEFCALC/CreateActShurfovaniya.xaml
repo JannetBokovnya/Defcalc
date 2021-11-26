@@ -1,0 +1,240 @@
+﻿<Window xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  x:Class="DEFCALC.CreateActShurfovaniya"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input" 
+        Title="Модуль по расчетам дефектов в шурфе" 
+        MinWidth="800"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen" 
+        Icon="Images/app_icon.ico" 
+        Loaded="Window_Loaded">
+
+    <telerik:RadBusyIndicator x:Name="Indicator"  IsBusy="False"
+                                           DisplayAfter="0"
+                                           BusyContent="Создание акта. Расчет дефектов...."
+                                           Visibility="Visible" >
+   
+        <Grid x:Name="grdMain">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="54"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Text=" Создание нового акта " Foreground="#FF555454" FontSize="18" FontWeight="Bold"  />
+       
+            <Grid Grid.Row="1">
+           
+                <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Margin="5,0,5,5" BorderBrush="#FF999A9C">
+                <GroupBox.Header>
+                    <Label Foreground="#FF555454" Background="Transparent" FontWeight="Bold" >Данные акта шурфования</Label>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Номер акта:"  HorizontalAlignment="Right" Margin="10"
+                                   Foreground="#FF555454" Background="Transparent" FontWeight="Bold"/>
+                        <TextBox x:Name="txtNumberOfAct" Grid.Column="1"  Margin="5"  />
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Дата шурфования:"  HorizontalAlignment="Right" Margin="9"
+                                   Foreground="#FF555454" Background="Transparent" FontWeight="Bold"/>
+                        <Controls:RadDatePicker x:Name="cldShurfDate" Grid.Column="1"   Culture="ru-Ru"
+                                                DateTimeWatermarkContent="Выбрать дату" Margin="5,5" />
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Дефектоскопист:" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="9" 
+                                   Foreground="#FF555454" Background="Transparent" FontWeight="Bold"/>
+                        <TextBox x:Name="txtDefectoskopist" Grid.Column="1"  Margin="5"   />
+
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Представитель ЛПУ:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="9" 
+                                   Foreground="#FF555454" Background="Transparent" FontWeight="Bold"/>
+                        <TextBox x:Name="txtAgentLPU" Grid.Column="1"  Margin="5"    />
+
+                    </Grid>
+                </Grid>
+            </GroupBox>
+            <GroupBox  Grid.Column="1" Margin="5,0,5,5"  BorderBrush="#FF999A9C">
+                <GroupBox.Header>
+                    <Label  Foreground="#FF555454" Background="Transparent" FontWeight="Bold" >Выбранный участок и труба</Label>
+                </GroupBox.Header>
+                <Border x:Name="AktPipe">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="250"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Участок:"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,0,0,0"
+                                       Foreground="#FF555454" Background="Transparent" FontWeight="Bold"/>
+                            <TextBox x:Name="txtRegion"  Grid.Column="1"  Margin="5" Visibility="Collapsed" />
+                            <TextBlock x:Name="txtselectRegion" Text="{Binding SelectRegion}"  Grid.Column="1" TextWrapping="Wrap"
+                                       Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="250"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Километраж:"  Margin="0,5,0,3" HorizontalAlignment="Right"  VerticalAlignment="Center"
+                                       Foreground="#FF555454" Background="Transparent" FontWeight="Bold"/>
+                            <TextBox x:Name="txtKm"  Grid.Column="1"  Margin="5"  Visibility="Collapsed" />
+                            <TextBlock x:Name="txtselectPipe" Text="{Binding SelectPipeKm}" Grid.Column="1"  Margin="5,5,0,3" VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="250"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="NumberPipeVTD" Text="Номера труб по ВТД:" Margin="5,5,0,3" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                       Foreground="#FF555454" Background="Transparent" FontWeight="Bold"/>
+                            <TextBlock x:Name="NumberP" Text="Номера труб:"  Margin="5,5,0,3" HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="Collapsed"
+                                       Foreground="#FF555454" Background="Transparent" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding SelectPipeNumberPipe}" Grid.Column="1" Margin="5,5,0,3" VerticalAlignment="Center" />
+                            <TextBox x:Name="NumberPipeNo" Grid.Column="1"  Margin="5" Visibility="Collapsed" />
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="250"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Количество труб:" x:Name="txtKt" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,5,0,3"
+                                       Foreground="#FF555454" Background="Transparent" FontWeight="Bold"/>
+                            <telerik:RadNumericUpDown x:Name="NumberDecimalDigits" Grid.Column="1" Margin="5" Value="0" Minimum="0" IsInteger="True" Visibility="Collapsed" />
+
+                        </Grid>
+
+                    </Grid>
+                </Border>
+            </GroupBox>
+        </Grid>
+       
+        <Button x:Name="btnCreateActShurfovaniya" Grid.Row="2" HorizontalAlignment="Right"  Margin="0,0,5,0" Click="btnCreateActShurfovaniya_Click"
+               Foreground="#FFD4D4D4" BorderBrush="#FFD4D4D4" Background="WhiteSmoke" ToolTip="Создать акт " >
+            <Button.Content>
+                <Image  Source="/DEFCALC;component/ImagesIcon/right.png"  />
+            </Button.Content>
+        </Button>
+        <Button x:Name="btnCancel"  Grid.Row="2" HorizontalAlignment="Left"  Margin="5,0,0,0" Click="btnCancel_Click"
+                Foreground="#FFD4D4D4" BorderBrush="#FFD4D4D4" Background="WhiteSmoke" ToolTip="Отменить " >
+            <Button.Content>
+                <Image  Source="/DEFCALC;component/ImagesIcon/left.png"  />
+            </Button.Content>
+        </Button>
+
+        <ScrollViewer x:Name="scrollMain" Grid.Row="3" HorizontalAlignment="Stretch"
+                                               VerticalAlignment="Stretch">
+
+            <ListBox x:Name="reportListBox"
+                                         Grid.Row="3"
+                                         Visibility="Visible"
+                                         ItemsSource="{Binding Reports}"
+                                         HorizontalAlignment="Stretch"
+                                         SelectionMode="Multiple"  />
+
+        </ScrollViewer>
+
+    </Grid>
+   </telerik:RadBusyIndicator>
+</Window>
+<!--Height="500" Width="700"-->
+
+<!--<Controls:RadComboBox x:Name="ddlAgentLPU"  Grid.Column="1"
+                                      ItemsSource="{Binding DictListAgentLPU}"
+                                      SelectedItem="{Binding SelectedDictAgentLPU}"
+                                      Margin="10"  HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Center"
+                                      SelectedIndex="0" FontFamily="Tahoma">
+                            <Controls:RadComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Controls:RadComboBox.ItemTemplate>
+                        </Controls:RadComboBox>-->
+
+<!--<DockPanel x:Name="dcpVtdData" Grid.Row="0" Visibility="Visible" HorizontalAlignment="Center" >
+            <StackPanel HorizontalAlignment="Center"  >
+                <GroupBox   FontWeight="Normal" Height="238" Width="320" BorderThickness="2">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="80"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Текущий участок и труба:" VerticalAlignment="Center"    TextWrapping="Wrap" FontSize="22" FontFamily="Arial Unicode MS" />
+                        <TextBlock x:Name="txtCarrentMg" Grid.Row="1" VerticalAlignment="Top"   TextWrapping="Wrap" FontSize="16"  FontFamily="Arial Unicode MS" />
+                        <TextBlock x:Name="txtCarrentRegion" Grid.Row="2" VerticalAlignment="Top"   TextWrapping="Wrap" FontSize="16"  FontFamily="Arial Unicode MS" />
+                        <TextBlock x:Name="txtCarrentKm" Grid.Row="3" VerticalAlignment="Top"   TextWrapping="Wrap" FontSize="16"  FontFamily="Arial Unicode MS" />
+                        <TextBlock x:Name="txtCarrentNumberPipe" Grid.Row="4" VerticalAlignment="Top"  TextWrapping="Wrap" FontSize="16"  FontFamily="Arial Unicode MS" />
+
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Height="180" Width="300" >
+                <Button x:Name="btnChangeSite" Height="27" Content="Изменить участок" Width="250" Margin="5" HorizontalAlignment="Left" Click="btnChangeSite_Click"></Button>
+                <Button x:Name="btnChangePipe" Height="27" Content="Изменить трубу" Width="250" Margin="5" HorizontalAlignment="Left" Click="btnChangePipe_Click"></Button>
+            </StackPanel>
+        </DockPanel>-->
+
+<!--<Controls:RadComboBox x:Name="ddlDefectoskopist" Grid.Column="1"  
+                                      ItemsSource="{Binding DictListDefectoskopist}"
+                                      SelectedItem="{Binding SelectedDictDefectoskopist}"
+                                      Margin="10" Width="250" VerticalAlignment="Center"  HorizontalAlignment="Stretch"
+                                      SelectedIndex="0" FontFamily="Tahoma">
+                            <Controls:RadComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Controls:RadComboBox.ItemTemplate>
+
+                        </Controls:RadComboBox>-->
+
+
+<!--<TextBlock Text="Участок"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" />
+                        <TextBox x:Name="txtRegion"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="99,7,0,4" FontFamily="Tahoma" Width="315"  />
+                        <TextBlock Text="{Binding SelectRegion}"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="74,3,0,0" FontFamily="Tahoma" Width="352"   />
+                        <TextBlock Text="Километраж" Grid.Row="1" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Center" FontFamily="Tahoma" />
+                        <TextBox x:Name="txtKm"   Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="99,3,0,3"  FontFamily="Tahoma" Width="268" />
+                        <TextBlock Text="{Binding SelectPipeKm}" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="99,9,0,8"  FontFamily="Tahoma" Width="315" />
+                        <TextBlock Text="Номера труб по ВТД " Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"  FontFamily="Tahoma" />
+                        <TextBlock Text="{Binding SelectPipeNumberPipe}" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="132,3,0,3"  FontFamily="Tahoma" Width="219" />-->

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SavePipe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <KeyMg></KeyMg>
+  <NameMg></NameMg>
+  <KeyNit></KeyNit>
+  <NameNit></NameNit>
+  <KmBegin></KmBegin>
+  <KmEnd></KmEnd>
+  <KeyRegion></KeyRegion>
+  <NameRegion></NameRegion>
+</SavePipe>

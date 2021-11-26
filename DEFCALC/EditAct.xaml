@@ -1,0 +1,207 @@
+﻿<Window x:Class="DEFCALC.EditAct"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"   
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Child="clr-namespace:DEFCALC"
+        xmlns:Telerik_Windows_Controls_Primitives="clr-namespace:Telerik.Windows.Controls.Primitives;assembly=Telerik.Windows.Controls.Navigation"
+        Title="Модуль по расчетам дефектов в шурфе" MinWidth="800" MinHeight="600"  WindowStartupLocation="CenterScreen" 
+         Loaded="Window_Loaded"
+        Icon="/Images/app_icon.ico" >
+
+    <Window.Resources>
+
+        <LinearGradientBrush x:Key="TabItemMouseOverBackground" StartPoint="0.500008,1.00006" 
+                EndPoint="0.500008,0">
+            <GradientStop Color="#FFE3F6FF" Offset="0" />
+            <GradientStop Color="#FFBFEAFF" Offset="1" />
+        </LinearGradientBrush>
+
+        <Style x:Key="RadTabControlStyle1" TargetType="{x:Type telerik:RadTabControl}">
+            <Setter Property="BackgroundVisibility" Value="Collapsed"/>
+
+        </Style>
+        <VisualState x:Key="TabItemMouseOverInnerBorder">
+            <Storyboard>
+                <ObjectAnimationUsingKeyFrames  
+                                        Storyboard.TargetProperty="Border.Background" 
+                                        Storyboard.TargetName="InnerFill">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.1" 
+                                            Value="{StaticResource TabItemMouseOverBackground}" />
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+        </VisualState>
+    </Window.Resources>
+
+    <!--<telerik:RadBusyIndicator x:Name="indicatorcalc"  IsBusy="False" Visibility="Visible" >-->
+        <Grid x:Name="grdEditAct">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="54"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+
+            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="lblNameakt"  Margin="0,5,0,-10" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
+            <TextBlock  Grid.Row="1" Grid.Column="1" Text="Акт редактируется " x:Name="lblTypeAkt"  VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="0,0,0,-20" />
+
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="0"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="0"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="btnCancel" Grid.Column="0" Click="BtnCancel_OnClick" Margin="0,15,0,-15"  HorizontalAlignment="Left"
+                     Foreground="#FFD4D4D4" BorderBrush="#FFD4D4D4" Background="WhiteSmoke" ToolTip="Вернуться на главную форму">
+                    <Button.Content>
+                        <Image  Source="/DEFCALC;component/ImagesIcon/back.png"  />
+                    </Button.Content>
+                </Button>
+                <Button x:Name="btnCalcGroupDefect" Grid.Column="1" Click="BtnCalcGroupDefect_OnClick"  Margin="0,15,0,-15"  
+                    HorizontalAlignment="Left" IsEnabled="False"
+                    Foreground="#FFD4D4D4" BorderBrush="#FFD4D4D4" Background="WhiteSmoke"  ToolTip="Сгруппировать дефекты">
+                    <Button.Content>
+                        <Image  Source="/DEFCALC;component/ImagesIcon/calc.png"  />
+                    </Button.Content>
+                </Button>
+                <Button x:Name="btnGraf" Grid.Column="2" Content="График" Margin="5"  HorizontalAlignment="Left" IsEnabled="False" Visibility="Collapsed"></Button>
+                <Button x:Name="btnPrint" Grid.Column="3" Click="BtnPrint_OnClick"   HorizontalAlignment="Left" IsEnabled="False" Margin="-1,15,0,-15" 
+                    Foreground="#FFD4D4D4" BorderBrush="#FFD4D4D4" Background="WhiteSmoke" ToolTip="Экспортировать акт в формат *.doc. Печать">
+                    <Button.Content>
+                        <Image  Source="/DEFCALC;component/ImagesIcon/to_word.png"  />
+                    </Button.Content>
+                </Button>
+                <Button x:Name="btnJson" Grid.Column="4" Content="json" Margin="5"  HorizontalAlignment="Left" IsEnabled="False" Visibility="Collapsed"></Button>
+                <Button x:Name="btnSignature" Grid.Column="5"   Click="BtnSignature_OnClick" HorizontalAlignment="Left" IsEnabled="False"  Margin="-2,15,0,-15" 
+                   Foreground="#FFD4D4D4" BorderBrush="#FFD4D4D4" Background="WhiteSmoke" ToolTip="Подписать акт" >
+                    <Button.Content>
+                        <Image  Source="/DEFCALC;component/ImagesIcon/akt_sign.png"  />
+                    </Button.Content>
+                </Button>
+            </Grid>
+            <telerik:RadTabControl Grid.Row="3" Grid.Column="1"  x:Name="generalTabControl"   BackgroundVisibility="Collapsed" 
+                               VerticalAlignment="Stretch" SelectionChanged="generalTabControl_SelectionChanged" Align="Right">
+
+                <telerik:RadTabItem Header="Основные данные"  x:Name="tbidataTabItem"
+												 >
+                    <StackPanel >
+                        <Child:ModulCalculationDefect x:Name="modulCalculationDefect"/>
+                    </StackPanel>
+                </telerik:RadTabItem>
+
+                <telerik:RadTabItem Header="Характеристики труб "  x:Name="tbicharacterPipe" 
+												  >
+                    <StackPanel>
+                        <Child:СharacteristicPipe x:Name="characteristicPipe"/>
+                    </StackPanel>
+                </telerik:RadTabItem>
+
+                <telerik:RadTabItem Header="Документальное представление "  x:Name="tbidocum"
+												  VerticalAlignment="Stretch"
+												  HorizontalAlignment="Stretch">
+                <ScrollViewer x:Name="treeDataScroll" 
+                                              VerticalScrollBarVisibility="Auto" 
+                                              HorizontalScrollBarVisibility="Auto"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch">
+                    <StackPanel >
+                        <Child:DocumentPresentation x:Name="documentPresentation"/>
+                    </StackPanel>
+                    </ScrollViewer>
+                </telerik:RadTabItem>
+
+
+
+            </telerik:RadTabControl>
+
+
+            <!--<ListBox x:Name="reportListBox"  Grid.Row="3"
+                                         Visibility="Visible"
+                                         ItemsSource="{Binding Reports}"
+                                         HorizontalAlignment="Stretch"
+                                         SelectionMode="Multiple" />-->
+
+            <telerik:RadButton x:Name="wndMenu" Grid.Column="0" Grid.RowSpan="3" Width="12" HorizontalAlignment="Left" Background="#FFEFDFDF" BorderBrush="White" 
+                          Click="wndMenu_Click" Visibility="Collapsed" >
+                <Image Source="/DEFCALC;component/Images/bullet_right.png" Width="8" Height="8" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            </telerik:RadButton>
+            <StackPanel x:Name="stpMenu" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" Width="100" 
+                        Margin="12,0,0,0" Visibility="Hidden" Background="#CCFFFFFF" Height="700">
+                <Grid Margin="0,60">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="80" />
+                    </Grid.RowDefinitions>
+
+                    <telerik:RadToggleButton x:Name="btnGroup" Background="White" Width="50" Height="50" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="Silver">
+                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/DEFCALC;component/Images/new.png" ToolTip="Сгруппировать дефекты"/>
+                    </telerik:RadToggleButton>
+                    <telerik:RadToggleButton x:Name="btnTube" Background="White" Width="50" Height="50" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="Silver">
+                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center"  ToolTip="Редактировать характеристики трубы" Source="/DEFCALC;component/Images/tube-about.png"/>
+                    </telerik:RadToggleButton>
+                    <telerik:RadToggleButton x:Name="btnAkt" Background="White" Width="50" Height="50" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="Silver">
+                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/DEFCALC;component/Images/akt.png" ToolTip="Открыть редактирование акта шурфования"/>
+                    </telerik:RadToggleButton>
+                    <telerik:RadToggleButton x:Name="btnAktPreview" Background="White" Width="50" Height="50" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="Silver">
+                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center"  ToolTip="Редактировать характеристики трубы" Source="/DEFCALC;component/Images/doc-preview.png"/>
+                    </telerik:RadToggleButton>
+                    <telerik:RadToggleButton x:Name="btnAktOpen" Background="White" Width="50" Height="50" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="Silver">
+                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/DEFCALC;component/Images/doc-listopen.png" ToolTip="Открыть редактирование акта шурфования"/>
+                    </telerik:RadToggleButton>
+                    <telerik:RadToggleButton x:Name="btnChart" Background="White" Width="50" Height="50" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="Silver" >
+                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center"  ToolTip="Построить график" Source="/DEFCALC;component/Images/chart.png"  />
+                    </telerik:RadToggleButton>
+                    <telerik:RadToggleButton x:Name="btnBack" Background="White" Width="50" Height="50" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="Silver" >
+                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center"  ToolTip="Построить график" Source="/DEFCALC;component/Images/back.png"  />
+                    </telerik:RadToggleButton>
+                </Grid>
+            </StackPanel>
+            <ScrollViewer x:Name="scrollMain" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
+                                               VerticalAlignment="Stretch">
+
+                <ListBox x:Name="reportListBox"
+                                         Grid.Row="4" Grid.Column="1"
+                                         Visibility="Visible"
+                                         ItemsSource="{Binding Reports}"
+                                         HorizontalAlignment="Stretch"
+                                         SelectionMode="Multiple"  />
+
+            </ScrollViewer>
+        </Grid>
+    <!--</telerik:RadBusyIndicator>-->
+</Window>
+<!--<GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="5" />-->
+<!--<StackPanel Orientation="Vertical">
+            <telerik:RadMenu x:Name="radMenu" ClickToOpen="False" Orientation="Vertical" IconColumnWidth ="60"
+                             VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemClick ="radMenu_ItemClick" BorderBrush="#4F000000" Background="#04000000">
+                <telerik:RadMenuItem Header="Меню">
+                    <telerik:RadMenuItem x:Name="characterPipe" Header="Характеристика труб" >
+                        <telerik:RadMenuItem.Icon>
+                            <Image Source="Images/tube-about_png.jpg" Stretch="None" />
+                        </telerik:RadMenuItem.Icon>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem x:Name="documPresentation" Header="Предварительный просмотр документального представления" >
+                        <telerik:RadMenuItem.Icon>
+                            <Image Source="Images/doc-preview_png.jpg" Stretch="None" />
+                        </telerik:RadMenuItem.Icon>
+                    </telerik:RadMenuItem>
+                </telerik:RadMenuItem>
+            </telerik:RadMenu>
+        </StackPanel>-->

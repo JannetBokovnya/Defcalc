@@ -1,0 +1,27 @@
+C:\My_Work\DotNet\Defcalc_333\DEFCALC\bin\Debug\DEFCALC.exe.config
+C:\My_Work\DotNet\Defcalc_333\DEFCALC\obj\x86\Debug\DEFCALC.csprojResolveAssemblyReference.cache
+C:\My_Work\DotNet\Defcalc_333\DEFCALC\obj\x86\Debug\ListOfActs.baml
+C:\My_Work\DotNet\Defcalc_333\DEFCALC\obj\x86\Debug\Login.baml
+C:\My_Work\DotNet\Defcalc_333\DEFCALC\obj\x86\Debug\PrintShurf.baml
+C:\My_Work\DotNet\Defcalc_333\DEFCALC\obj\x86\Debug\App.baml
+C:\My_Work\DotNet\Defcalc_333\DEFCALC\obj\x86\Debug\ListOfActs.g.cs
+C:\My_Work\DotNet\Defcalc_333\DEFCALC\obj\x86\Debug\Login.g.cs
+C:\My_Work\DotNet\Defcalc_333\DEFCALC\obj\x86\Debug\PrintShurf.g.cs
+C:\My_Work\DotNet\Defcalc_333\DEFCALC\obj\x86\Debug\App.g.cs
+C:\My_Work\DotNet\Defcalc_333\DEFCALC\obj\x86\Debug\DEFCALC_Content.g.cs
+C:\My_Work\DotNet\Defcalc_333\DEFCALC\obj\x86\Debug\DEFCALC_MarkupCompile.cache
+C:\My_Work\DotNet\Defcalc_333\DEFCALC\obj\x86\Debug\DEFCALC.csprojFakesResolveAssemblyReference.cache
+C:\Проекты для гитхаба\Defcalc_333\DEFCALC\bin\Debug\DEFCALC.exe.config
+C:\Проекты для гитхаба\Defcalc_333\DEFCALC\obj\x86\Debug\DEFCALC.csprojFakesResolveAssemblyReference.cache
+C:\Проекты для гитхаба\Defcalc_333\DEFCALC\obj\x86\Debug\DEFCALC.csprojResolveAssemblyReference.cache
+C:\Проекты для гитхаба\Defcalc_333\DEFCALC\obj\x86\Debug\ListOfActs.baml
+C:\Проекты для гитхаба\Defcalc_333\DEFCALC\obj\x86\Debug\Login.baml
+C:\Проекты для гитхаба\Defcalc_333\DEFCALC\obj\x86\Debug\PrintShurf.baml
+C:\Проекты для гитхаба\Defcalc_333\DEFCALC\obj\x86\Debug\App.baml
+C:\Проекты для гитхаба\Defcalc_333\DEFCALC\obj\x86\Debug\ListOfActs.g.cs
+C:\Проекты для гитхаба\Defcalc_333\DEFCALC\obj\x86\Debug\Login.g.cs
+C:\Проекты для гитхаба\Defcalc_333\DEFCALC\obj\x86\Debug\PrintShurf.g.cs
+C:\Проекты для гитхаба\Defcalc_333\DEFCALC\obj\x86\Debug\App.g.cs
+C:\Проекты для гитхаба\Defcalc_333\DEFCALC\obj\x86\Debug\DEFCALC_Content.g.cs
+C:\Проекты для гитхаба\Defcalc_333\DEFCALC\obj\x86\Debug\DEFCALC_MarkupCompile.cache
+C:\Проекты для гитхаба\Defcalc\DEFCALC\bin\Debug\DEFCALC.exe.config

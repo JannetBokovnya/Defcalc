@@ -1,0 +1,58 @@
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\bin\Debug\test.xml
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\bin\Debug\DrawPipe.exe.manifest
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\bin\Debug\DrawPipe.application
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\bin\Debug\DrawPipe.exe
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\bin\Debug\DrawPipe.pdb
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.csprojResolveAssemblyReference.cache
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\DefectControl.baml
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\PipeLineSegmentControl.baml
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\PipeSegmentControl.baml
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\MainWindow.g.cs
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\DefectControl.g.cs
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\PipeControl.g.cs
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\PipeLineSegmentControl.g.cs
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\PipeSegmentControl.g.cs
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\App.g.cs
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe_Content.g.cs
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe_MarkupCompile.cache
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe_MarkupCompile.lref
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\MainWindow.baml
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\PipeControl.baml
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.g.resources
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.Properties.Resources.resources
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.csproj.GenerateResource.Cache
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.TrustInfo.xml
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.exe.manifest
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.application
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.exe
+C:\My_Work\DotNet\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.pdb
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\bin\Debug\test.xml
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\bin\Debug\DrawPipe.exe.manifest
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\bin\Debug\DrawPipe.application
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\bin\Debug\DrawPipe.exe
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\bin\Debug\DrawPipe.pdb
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.csprojResolveAssemblyReference.cache
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\DefectControl.baml
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\PipeLineSegmentControl.baml
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\PipeSegmentControl.baml
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\MainWindow.g.cs
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\DefectControl.g.cs
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\PipeControl.g.cs
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\PipeLineSegmentControl.g.cs
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\PipeSegmentControl.g.cs
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\App.g.cs
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe_Content.g.cs
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe_MarkupCompile.cache
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe_MarkupCompile.lref
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\MainWindow.baml
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\View\Control\PipeControl.baml
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.g.resources
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.Properties.Resources.resources
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.csproj.GenerateResource.Cache
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.TrustInfo.xml
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.exe.manifest
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.application
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.exe
+C:\Проекты для гитхаба\Defcalc_333\DrawPipe\DrawPipe\obj\x86\Debug\DrawPipe.pdb
